@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  langgraph-app:
+    build: .
+    container_name: langgraph-news-agent
+    ports:
+      - "8000:8000"
+    volumes:
+      # 開発時にホットリロード用にソースコードをマウント
+      - .:/app
+      # node_modulesやvenvディレクトリは除外
+      - /app/venv
+      - /app/__pycache__
+    environment:
+      # 環境変数ファイルから読み込み（.envファイルがある場合）
+      - ENV_FILE=.env
+    env_file:
+      - .env
+    restart: unless-stopped
+    # 起動スクリプトでLangGraphサーバーを起動し、ブラウザを自動で開く
+    command: ["./start.sh"]
+    
+  # 本番環境用の設定例（コメントアウト）
+  # langgraph-prod:
+  #   build: .
+  #   container_name: langgraph-news-agent-prod
+  #   ports:
+  #     - "8001:8000"
+  #   environment:
+  #     - ENV=production
+  #   env_file:
+  #     - .env.prod
+  #   restart: unless-stopped
+  #   command: ["langgraph", "start", "--host", "0.0.0.0", "--port", "8000"]

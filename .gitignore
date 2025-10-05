@@ -1,0 +1,24 @@
+# 環境変数ファイル（機密情報）
+.env
+
+# LangSmith関連
+.langsmith/
+.langgraph_api/
+langgraph_cache/
+
+# Python関連
+__pycache__/
+*.pyc
+*.pyo
+venv/
+
+# IDE関連
+.vscode/
+.idea/
+
+# OS関連
+.DS_Store
+Thumbs.db
+
+# ログファイル
+*.log
