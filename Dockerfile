@@ -29,8 +29,5 @@ COPY .env* ./
 # 環境変数を設定して自動ブラウザ起動を有効化
 ENV LANGGRAPH_STUDIO_URL=https://smith.langchain.com/studio/?baseUrl=http://localhost:8000
 
-# 起動スクリプトを実行可能にする
-RUN chmod +x start.sh
-
-# 起動スクリプトでLangGraphサーバーを起動し、ブラウザを自動で開く
-CMD ["./start.sh"]
+# LangGraph開発サーバーを起動
+CMD ["langgraph", "dev", "--host", "0.0.0.0", "--port", "8000"]
